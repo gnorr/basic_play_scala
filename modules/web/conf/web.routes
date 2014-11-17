@@ -1,0 +1,3 @@
+GET        /                    controllers.web.WebController.index
+GET        /libs/*file          controllers.WebJarAssets.at(file)
+GET        /assets/*file        controllers.Assets.at(path="/public", file)
