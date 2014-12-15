@@ -1,5 +1,5 @@
-GET           /item             controllers.api.ItemController.list
-POST          /item             controllers.api.ItemController.create
-GET           /item/:id         controllers.api.ItemController.details(id: Int)
-PUT           /item/:id         controllers.api.ItemController.update(id: Int)
-DELETE        /items/:id        controllers.api.ItemController.delete(id: Int)
+GET           /item                 controllers.api.ItemController.list
+POST          /item                 controllers.api.ItemController.create
+GET           /item/$id<\d+>        controllers.api.ItemController.details(id: Int)
+PUT           /item/$id<\d+>        controllers.api.ItemController.update(id: Int)
+DELETE        /item/$id<\d+>        controllers.api.ItemController.delete(id: Int)

@@ -11,12 +11,22 @@ class ItemControllerSpec extends PlaySpecification {
   "ItemController" should {
     "list items" in new WithApplication() {
       route(FakeRequest(controllers.api.routes.ItemController.list())) match {
-        case Some(response) => {
+        case Some(response) =>
           status(response) must equalTo(OK)
           contentAsJson(response) must equalTo(Json.arr())
-        }
         case None => failure
       }
     }
+/*
+    "create items" in new WithApplication() {
+      route(  FakeRequest(POST, controllers.api.routes.ItemController.create()).
+        withJsonBody(Json.parse("""{"name":"test item"}"""))) match {
+        case Some(response) =>
+          status(response) mustEqual OK
+          //contentAsJson(response)
+        case None => failure
+      }
+    }
+*/
   }
 }

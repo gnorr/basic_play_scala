@@ -11,14 +11,18 @@ import play.api.libs.json.Json
 import scala.collection.concurrent.TrieMap
 
 case class Item(id: Int, name: String)
+case class CreateItem(name: String)
 
 object Item {
   implicit val writesItem = Json.writes[Item]
   implicit val readsItem = Json.reads[Item]
+  implicit val readsCreateItem = Json.reads[CreateItem]
 
   private val items = TrieMap.empty[Int, Item]
   private val seq = new AtomicInteger()
 
+  //items.put(1, Item(1, "test item"))
+  //seq.incrementAndGet()
 
   def list(): Seq[Item] = items.values.to[Seq]
 
@@ -33,8 +37,10 @@ object Item {
 
   def update(id: Int, name: String): Option[Item] = {
     val item = Item(id, name)
-    items.replace(id, item)
-    Some(item)
+    if(items.replace(id, item).isDefined)
+      Some(item)
+    else
+      None
   }
 
   def delete(id: Int): Boolean = items.remove(id).isDefined
